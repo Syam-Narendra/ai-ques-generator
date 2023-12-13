@@ -2,6 +2,8 @@
 import useSWR from "swr";
 import { useState } from "react";
 import QuestionCard from "@/components/questionCard";
+import Link from 'next/link';
+
 
 export default function StartExam({ params: { skill, level } }) {
   const [quesNumber, setQuesNumber] = useState(0);
@@ -49,9 +51,9 @@ export default function StartExam({ params: { skill, level } }) {
           />
         )}
         {quesNumber === 9 && (
-          <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <Link href={`/results/${skill}/${userScore}`} className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Submit
-          </button>
+          </Link>
         )}
       </div>
     </main>
