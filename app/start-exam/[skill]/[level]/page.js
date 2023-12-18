@@ -21,7 +21,7 @@ export default function StartExam({ params: { skill, level } }) {
     return await response.json();
   };
 
-  const { data, error, isLoading } = useSWR("/api", getQuestions);
+  const { data, error, isLoading } = useSWR("/api/", getQuestions);
   if (error) return <h1>Something Went Wrong...</h1>;
   if (isLoading) return <div>Loading...</div>;
 
