@@ -1,34 +1,40 @@
-
-// import LogoutIcon from "../../assets/icons/logout.svg";
-'use client'
-import Link from 'next/link'
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import "./styles.css";
-function SideBar() {
+
+const sideBarButtons = [
+  {
+    link: "/search-members",
+    text: "Search Team",
+  },
+  {
+    link: "/search-members/saved-projects",
+    text: "Saved Projects",
+  },
+];
+
+function SideBar({ children }) {
+  const pathname = usePathname();
+  console.log(pathname);
   return (
-    <nav className="sidebar">
-      <div className="sidebar-container">
-        <div className="sidebar-logo-container">
-          <h1 className="sidebar-item-label">iTalent Members</h1>
-        </div>
-
-        <div className="sidebar-container">
-          <div className="sidebar-items">
-            <Link href="/search-members" className="sidebar-item-active">
-              <span className="sidebar-item-label">Members Search</span>
+    <div className="flex h-screen flex-col md:flex-row">
+      <div className="md:flex md:flex-col md:w-52 justify-center p-1 md:h-screen flex-row items-center w-screen h-min">
+        {sideBarButtons.map((each) => {
+          const activeClass =
+            each.link === pathname ? "text-white" : "text-gray-600";
+          return (
+            <Link
+              href={each.link}
+              className={`${activeClass} w-full mb-5 font-bold py-2 px-4 rounded`}
+            >
+              {each.text}
             </Link>
-          </div>
-
-          <div className="sidebar-footer">
-            <span className="sidebar-item-label">Logout</span>
-            <img
-            //   src={LogoutIcon}
-              alt="icon-logout"
-              className="sidebar-item-icon"
-            />
-          </div>
-        </div>
+          );
+        })}
       </div>
-    </nav>
+      <div className="w-screen bg-customBlack">{children}</div>
+    </div>
   );
 }
 
